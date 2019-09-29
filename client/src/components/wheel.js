@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import classes from "./wheel.css";
+import "./wheel.css";
 
 class Wheel extends Component {
   constructor(props) {
@@ -10,7 +10,20 @@ class Wheel extends Component {
       feelings: []
     };
   }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:3001/api/feelings")
+      .then(response => {
+        console.log(response);
+        this.setState({
+          feelings: response.data
+        });
+      })
+      .catch(error => console.log(error));
+  }
   render() {
+    console.log("data:", this.state);
     return <div className="Wheel"></div>;
   }
 }
